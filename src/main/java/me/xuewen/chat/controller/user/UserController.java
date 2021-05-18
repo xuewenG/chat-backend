@@ -3,12 +3,10 @@ package me.xuewen.chat.controller.user;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import me.xuewen.chat.constant.code.UserResponseCode;
 import me.xuewen.chat.constant.user.GenderTypeConstant;
-import me.xuewen.chat.controller.user.bean.LoginReqBean;
-import me.xuewen.chat.controller.user.bean.LoginRespBean;
-import me.xuewen.chat.controller.user.bean.RegisterReqBean;
-import me.xuewen.chat.controller.user.bean.RegisterRespBean;
+import me.xuewen.chat.controller.user.bean.*;
 import me.xuewen.chat.entity.Response;
 import me.xuewen.chat.entity.User;
 import me.xuewen.chat.service.UserService;
@@ -17,10 +15,7 @@ import me.xuewen.chat.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -90,5 +85,25 @@ public class UserController {
         RegisterRespBean enrollRespBean = new RegisterRespBean();
         enrollRespBean.setAccount(account);
         return ResultUtil.success(enrollRespBean);
+    }
+
+    @GetMapping("avatar")
+    public Response getAvatarByCredential(@RequestParam String credential) {
+        if (StrUtil.isBlank(credential)) {
+            return ResultUtil.success(new GetAvatarReqBean(""));
+        }
+        User accountUser = userService.getByAccount(credential);
+        User emailUser = userService.getByEmail(credential);
+        User user = null;
+        if (accountUser != null) {
+            user = accountUser;
+        }
+        if (emailUser != null) {
+            user = emailUser;
+        }
+        if (user == null) {
+            return ResultUtil.success(new GetAvatarReqBean(""));
+        }
+        return ResultUtil.success(new GetAvatarReqBean(user.getAvatar()));
     }
 }
