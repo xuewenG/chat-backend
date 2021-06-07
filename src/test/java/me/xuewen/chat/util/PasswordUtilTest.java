@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PasswordUtilTest {
     @Test
     public void testEncode() {

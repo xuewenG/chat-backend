@@ -7,6 +7,7 @@ import me.xuewen.chat.socket.bean.SocketMessage;
 import me.xuewen.chat.socket.handler.SocketMessageHandler;
 import me.xuewen.chat.socket.handler.impl.MarkPrivateMessageReadHandler;
 import me.xuewen.chat.socket.handler.impl.PrivateMessageHandler;
+import me.xuewen.chat.socket.handler.impl.ShareScreenHandler;
 import me.xuewen.chat.util.JsonUtil;
 import me.xuewen.chat.util.SocketUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,8 @@ public class ChatSocket {
             socketMessageHandler = new PrivateMessageHandler();
         } else if (SocketMessageType.MARK_PRIVATE_MESSAGE_READ.equals(messageType)) {
             socketMessageHandler = new MarkPrivateMessageReadHandler();
+        } else if (SocketMessageType.SHARE_SCREEN.equals(messageType)) {
+            socketMessageHandler = new ShareScreenHandler();
         } else {
             // 忽略不支持的事件类型
             return;

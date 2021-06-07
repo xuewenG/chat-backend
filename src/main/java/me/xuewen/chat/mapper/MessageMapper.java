@@ -12,7 +12,8 @@ public interface MessageMapper {
             "WHERE " +
             "(fromId = #{userId} and toId = #{contactId} and contactType = #{contactType}) " +
             "or " +
-            "(fromId = #{contactId} and toId = #{userId} and contactType = #{contactType})")
+            "(fromId = #{contactId} and toId = #{userId} and contactType = #{contactType}) " +
+            "ORDER BY id")
     List<Message> selectMessage(Integer contactType, Integer userId, Integer contactId);
 
     @Insert("INSERT INTO " +
