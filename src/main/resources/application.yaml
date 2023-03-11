@@ -23,9 +23,17 @@ spring:
     database: ${REDIS_DATABASE}
   mail:
     host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
     username: ${MAIL_USER}
     password: ${MAIL_PASSWORD}
     from: ${MAIL_FROM}
+    default-encoding: UTF-8
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.ssl.enable: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.socketFactory.class: javax.net.ssl.SSLSocketFactory
+    spring.mail.properties.mail.imap.ssl.socketFactory.fallback: false
 server:
   port: ${SERVER_PORT}
   servlet:
