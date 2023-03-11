@@ -29,6 +29,7 @@ spring:
 server:
   port: ${SERVER_PORT}
   servlet:
+    context-path: ${SERVER_CONTEXT_PATH}
     encoding:
       charset: UTF-8
       force: true
