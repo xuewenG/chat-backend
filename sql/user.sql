@@ -1,0 +1,13 @@
+CREATE TABLE `user`  (
+  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `account` VARCHAR(255) NOT NULL,
+  `nickname` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `gender` INT(11) NULL DEFAULT NULL,
+  `birthday` DATETIME NULL DEFAULT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `avatar` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX ACCOUNT_INDEX(`account`),
+  INDEX EMAIL_INDEX(`email`)
+) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
